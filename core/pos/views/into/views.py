@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView, DeleteView, UpdateView, View
 from weasyprint import HTML, CSS
 
-from core.pos.forms import IntoForm, ClientForm
+from core.pos.forms import IntoForm
 from core.pos.mixins import ValidatePermissionRequiredMixin, ExistsCompanyMixin
 from core.pos.models import Into, Product, IntoProduct, Client
 from core.reports.forms import ReportForm
@@ -94,8 +94,8 @@ class IntoCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                     products = json.loads(request.POST['products'])
                     into = Into()
                     into.date_joined = request.POST['date_joined']
-                    into.client_id = int(request.POST['client'])
-                    into.iva = float(request.POST['iva'])
+                    # into.client_id = int(request.POST['client'])
+                    # into.iva = float(request.POST['iva'])
                     into.save()
                     for i in products:
                         detail = IntoProduct()
@@ -110,19 +110,6 @@ class IntoCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                             detail.product.save()
                     into.calculate_invoice()
                     data = {'id': into.id}
-            elif action == 'search_client':
-                data = []
-                term = request.POST['term']
-                clients = Client.objects.filter(
-                    Q(names__icontains=term) | Q(dni__icontains=term))[0:10]
-                for i in clients:
-                    item = i.toJSON()
-                    item['text'] = i.get_full_name()
-                    data.append(item)
-            elif action == 'create_client':
-                with transaction.atomic():
-                    form = ClientForm(request.POST)
-                    data = form.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:
@@ -136,7 +123,7 @@ class IntoCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
         context['list_url'] = self.success_url
         context['action'] = 'add'
         context['products'] = []
-        context['frmClient'] = ClientForm()
+        # context['frmClient'] = ClientForm()
         return context
 
 
@@ -148,11 +135,11 @@ class IntoUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
     url_redirect = success_url
     permission_required = 'change_into'
 
-    def get_form(self, form_class=None):
-        instance = self.get_object()
-        form = IntoForm(instance=instance)
-        form.fields['client'].queryset = Client.objects.filter(id=instance.client.id)
-        return form
+    # def get_form(self, form_class=None):
+    #     instance = self.get_object()
+    #     form = IoForm(instance=instance)
+    #     # form.fields['ntclient'].queryset = Client.objects.filter(id=instance.client.id)
+    #     return form
 
     def get_details_product(self):
         data = []
@@ -194,8 +181,8 @@ class IntoUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
                         products = json.loads(request.POST['products'])
                         into = self.get_object()
                         into.date_joined = request.POST['date_joined']
-                        into.client_id = int(request.POST['client'])
-                        into.iva = float(request.POST['iva'])
+                        # into.client_id = int(request.POST['client'])
+                        into.requisicion = int(request.POST['requicision'])
                         into.save()
                         into.intoproduct_set.all().delete()
                         for i in products:
@@ -212,19 +199,6 @@ class IntoUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
                         into.calculate_invoice()
                         data = {'id': into.id}
                     data = {'id': into.id}
-            elif action == 'search_client':
-                data = []
-                term = request.POST['term']
-                clients = Client.objects.filter(
-                    Q(names__icontains=term) | Q(dni__icontains=term))[0:10]
-                for i in clients:
-                    item = i.toJSON()
-                    item['text'] = i.get_full_name()
-                    data.append(item)
-            elif action == 'create_client':
-                with transaction.atomic():
-                    form = ClientForm(request.POST)
-                    data = form.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:
@@ -238,7 +212,7 @@ class IntoUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         context['products'] = self.get_details_product()
-        context['frmClient'] = ClientForm()
+        # context['frmClient'] = ClientForm()
         return context
 
 

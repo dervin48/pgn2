@@ -25,10 +25,40 @@ class Category(models.Model):
         verbose_name_plural = 'Categorias'
         ordering = ['id']
 
+class Cargo(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
+    class Meta:
+        verbose_name = 'Cargo'
+        verbose_name_plural = 'Cargos'
+        ordering = ['id']
+
+class Servicio(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre del Servicio', unique=True)
+    desc = models.CharField(max_length=500, null=True, blank=True, verbose_name='Descripción')
+
+    def __str__(self):
+        return self.name
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
+    class Meta:
+        verbose_name = 'Servicio'
+        verbose_name_plural = 'Servicios'
+        ordering = ['id']
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Categoría')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Categoría')
     image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
     is_inventoried = models.BooleanField(default=True, verbose_name='¿Es invetario inicial?')
     stock = models.IntegerField(default=0, verbose_name='Stock')
@@ -86,7 +116,8 @@ class Company(models.Model):
         ordering = ['id']
 class Client(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
-    dni = models.CharField(max_length=13, unique=True, verbose_name='Número de DPI')
+    servicio = models.ForeignKey(Servicio, on_delete=models.PROTECT, verbose_name='Servicio a que Pertenece')
+    cargo = models.ForeignKey(Cargo, on_delete=models.PROTECT, verbose_name='Cargo')
     birthdate = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
     gender = models.CharField(max_length=10, choices=genders, default='male', verbose_name='Genero')
@@ -95,13 +126,16 @@ class Client(models.Model):
         return self.get_full_name()
 
     def get_full_name(self):
-        return f'{self.names} ({self.dni})'
+        return f'{self.names} ({self.servicio})'
 
     def toJSON(self):
         item = model_to_dict(self)
         item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
+        item['servicio'] = self.servicio.toJSON()
+        item['cargo'] = self.cargo.toJSON()
         item['birthdate'] = self.birthdate.strftime('%Y-%m-%d')
         item['full_name'] = self.get_full_name()
+
         return item
 
     class Meta:
@@ -111,35 +145,27 @@ class Client(models.Model):
 
 
 class Into(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, null=True, blank=True)
     date_joined = models.DateField(default=datetime.now)
+    requisicion = models.IntegerField( null= True, verbose_name="No_requisicion" )
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    total_iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-
-    def __str__(self):
-        return self.client.names
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if Company.objects.all().exists():
             self.company = Company.objects.first()
         super(Into, self).save()
-
+    def __str__(self):
+        return self.requisicion
     def get_number(self):
         return f'{self.id:06d}'
 
     def toJSON(self):
         item = model_to_dict(self)
         item['number'] = self.get_number()
-        item['client'] = self.client.toJSON()
-        item['subtotal'] = f'{self.subtotal:.2f}'
-        item['iva'] = f'{self.iva:.2f}'
-        item['total_iva'] = f'{self.total_iva:.2f}'
-        item['total'] = f'{self.total:.2f}'
         item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+        item['requisicion'] = self.requisicion
+        item['subtotal'] = f'{self.subtotal:.2f}'
         item['intoproduct'] = [i.toJSON() for i in self.intoproduct_set.all()]
         return item
 
@@ -147,13 +173,13 @@ class Into(models.Model):
         for detail in self.intoproduct_set.filter(product__is_inventoried=True):
             detail.product.stock += detail.cant
             detail.product.save()
-        super(Sale, self).delete()
+        super(Into, self).delete()
 
     def calculate_invoice(self):
         subtotal = self.intoproduct_set.all().aggregate(result=Coalesce(Sum(F('price') * F('cant')), 0.00, output_field=FloatField())).get('result')
         self.subtotal = subtotal
-        self.total_iva = self.subtotal * float(self.iva)
-        self.total = float(self.subtotal) + float(self.total_iva)
+        # self.total_iva = self.subtotal * float(self.iva)
+        # self.total = float(self.subtotal) + float(self.total_iva)
         self.save()
 
     class Meta:
@@ -187,15 +213,19 @@ class IntoProduct(models.Model):
 
 class Sale(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT)
     date_joined = models.DateField(default=datetime.now)
+    requisicion = models.IntegerField( null= True, verbose_name="No_requisicion" )
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    total_iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    # iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    # total_iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    # total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
 
     def __str__(self):
         return self.client.names
+
+    def __str__(self):
+        return self.requisicion
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -211,10 +241,11 @@ class Sale(models.Model):
         item['number'] = self.get_number()
         item['client'] = self.client.toJSON()
         item['subtotal'] = f'{self.subtotal:.2f}'
-        item['iva'] = f'{self.iva:.2f}'
-        item['total_iva'] = f'{self.total_iva:.2f}'
-        item['total'] = f'{self.total:.2f}'
+        # item['iva'] = f'{self.iva:.2f}'
+        # item['total_iva'] = f'{self.total_iva:.2f}'
+        # item['total'] = f'{self.total:.2f}'
         item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+        item['requisicion'] = self.requisicion
         item['saleproduct'] = [i.toJSON() for i in self.saleproduct_set.all()]
         return item
 
@@ -227,8 +258,8 @@ class Sale(models.Model):
     def calculate_invoice(self):
         subtotal = self.saleproduct_set.all().aggregate(result=Coalesce(Sum(F('price') * F('cant')), 0.00, output_field=FloatField())).get('result')
         self.subtotal = subtotal
-        self.total_iva = self.subtotal * float(self.iva)
-        self.total = float(self.subtotal) + float(self.total_iva)
+        # self.total_iva = self.subtotal * float(self.iva)
+        # self.total = float(self.subtotal) + float(self.total_iva)
         self.save()
 
     class Meta:
@@ -255,7 +286,7 @@ class SaleProduct(models.Model):
         return item
 
     class Meta:
-        verbose_name = 'Detalle de Venta'
-        verbose_name_plural = 'Detalle de Ventas'
+        verbose_name = 'Detalle de Solicitud'
+        verbose_name_plural = 'Detalle de Solicitudes'
         default_permissions = ()
         ordering = ['id']

@@ -12,7 +12,7 @@ var sale = {
             parameters['start_date'] = '';
             parameters['end_date'] = '';
         }
-        tblSale = Q('#data').DataTable({
+        tblSale = $('#data').DataTable({
             responsive: true,
             // scrollX: true,
             // autoWidth: false,
@@ -32,9 +32,9 @@ var sale = {
                 {"data": "client.full_name"},
                 {"data": "date_joined"},
                 {"data": "subtotal"},
-                {"data": "iva"},
-                {"data": "total_iva"},
-                {"data": "total"},
+//                {"data": "iva"},
+//                {"data": "total_iva"},
+//                {"data": "total"},
                 {"data": "id"},
             ],
             order: [[0, "desc"], [2, "desc"]],
@@ -47,7 +47,7 @@ var sale = {
                     }
                 },
                 {
-                    targets: [-2, -3, -4, -5],
+                    targets: [-2],
                     class: 'text-center',
                     render: function (data, type, row) {
                         return 'Q' + parseFloat(data).toFixed(2);
@@ -153,7 +153,7 @@ $(function () {
                         targets: [-1, -3],
                         class: 'text-center',
                         render: function (data, type, row) {
-                            return 'Q' + parseFloat(data).toFixed(2);
+                            return '$' + parseFloat(data).toFixed(2);
                         }
                     },
                     {

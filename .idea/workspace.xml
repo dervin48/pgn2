@@ -2,8 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="846b5eb1-6ba7-4338-9296-d1816ffdc7d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/core/pos/static/servicio/js/list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/pos/templates/servicio/create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/pos/templates/servicio/delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/pos/templates/servicio/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/pos/views/servicio/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/login/templates/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/login/templates/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/migrations/0002_into_alter_client_dni_alter_company_mobile_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/migrations/0003_alter_intoproduct_options_into_client_into_company.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/client/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/client/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/into/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/into/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/into/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/into/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/product/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/product/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/sale/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/sale/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/sale/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/sale/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/client/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/client/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/into/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/into/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/into/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/into/invoice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/into/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/into/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/invoice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/client/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/client/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/into/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/into/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/sale/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/sale/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vtc/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vtc/sidebar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +47,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -29,13 +63,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrador/Desktop/demostracion/pgn2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrador\Desktop\demostracion\pgn2\core\pos\static\cargo\js" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -48,10 +48,10 @@ class SaleListView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, FormView
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Ventas'
+        context['title'] = 'Listado de Solicitudes'
         context['create_url'] = reverse_lazy('sale_create')
         context['list_url'] = reverse_lazy('sale_list')
-        context['entity'] = 'Ventas'
+        context['entity'] = 'Solicitudes'
         return context
 
 
@@ -94,7 +94,7 @@ class SaleCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                     sale = Sale()
                     sale.date_joined = request.POST['date_joined']
                     sale.client_id = int(request.POST['client'])
-                    sale.iva = float(request.POST['iva'])
+                    # sale.iva = float(request.POST['iva'])
                     sale.save()
                     for i in products:
                         detail = SaleProduct()
@@ -130,8 +130,8 @@ class SaleCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de una Venta'
-        context['entity'] = 'Ventas'
+        context['title'] = 'Creación de una Solicitud'
+        context['entity'] = 'Solicitudes'
         context['list_url'] = self.success_url
         context['action'] = 'add'
         context['products'] = []
@@ -194,7 +194,7 @@ class SaleUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
                         sale = self.get_object()
                         sale.date_joined = request.POST['date_joined']
                         sale.client_id = int(request.POST['client'])
-                        sale.iva = float(request.POST['iva'])
+                        # sale.iva = float(request.POST['iva'])
                         sale.save()
                         sale.saleproduct_set.all().delete()
                         for i in products:
@@ -262,8 +262,8 @@ class SaleDeleteView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Delete
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de una Venta'
-        context['entity'] = 'Ventas'
+        context['title'] = 'Eliminación de una Solicitud'
+        context['entity'] = 'Solicitudes'
         context['list_url'] = self.success_url
         return context
 

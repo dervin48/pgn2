@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
 from core.pos.forms import ClientForm
 from core.pos.mixins import ValidatePermissionRequiredMixin
 from core.pos.models import Client
@@ -28,10 +27,10 @@ class ClientListView(ValidatePermissionRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Clientes'
+        context['title'] = 'Listado de Solicitantes'
         context['create_url'] = reverse_lazy('client_create')
         context['list_url'] = reverse_lazy('client_list')
-        context['entity'] = 'Clientes'
+        context['entity'] = 'Solicitantes'
         return context
 
 
@@ -58,8 +57,8 @@ class ClientCreateView(ValidatePermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación un Cliente'
-        context['entity'] = 'Clientes'
+        context['title'] = 'Creación de un Solicitante'
+        context['entity'] = 'Solicitantes'
         context['list_url'] = self.success_url
         context['action'] = 'add'
         return context
@@ -92,8 +91,8 @@ class ClientUpdateView(ValidatePermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición un Cliente'
-        context['entity'] = 'Clientes'
+        context['title'] = 'Edición de un Solicitante'
+        context['entity'] = 'Solicitantes'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         return context
@@ -120,7 +119,7 @@ class ClientDeleteView(ValidatePermissionRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de un Cliente'
-        context['entity'] = 'Clientes'
+        context['title'] = 'Eliminación de un Solicitante'
+        context['entity'] = 'Solicitantes'
         context['list_url'] = self.success_url
         return context

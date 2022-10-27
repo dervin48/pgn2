@@ -36,13 +36,13 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        <b><i class="fas fa-boxes"></i> Detalle de insumo</b>
+                                        <b><i class="fas fa-boxes"></i> Detalle de insumos</b>
                                     </h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
                                         <div class="form-group">
-                                            <label>Buscador de insumos:</label>
+                                            <label>Buscador de insumo:</label>
                                             <div class="input-group">
                                                 <select class="form-control select2" name="search_product"></select>
                                                 {#                                        <input type="text" class="form-control" autocomplete="off"#}
@@ -54,7 +54,7 @@
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item btnSearchProducts">
-                                                            <i class="fas fa-search"></i> Buscar insumos
+                                                            <i class="fas fa-search"></i> Buscar productos
                                                         </a>
                                                         <a class="dropdown-item btnClearSearch">
                                                             <i class="fas fa-times"></i> Limpiar búsqueda
@@ -71,7 +71,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Eliminar</th>
-                                                <th>Insumo</th>
+                                                <th>Producto</th>
                                                 <th>Stock</th>
                                                 <th>Precio Unitario</th>
                                                 <th>Cantidad</th>
@@ -88,19 +88,19 @@
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title"><b><i class="fas fa-shopping-cart"></i> Datos de la requisicion</b></h3>
+                                    <h3 class="card-title"><b><i class="fas fa-shopping-cart"></i> Datos de la Requisicion</b></h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
                                         <input type="hidden" name="action" value="{{ action }}">
                                         <div class="form-group">
-                                            <label>Fecha de solicitud:</label>
+                                            <label>Fecha de Solicitud:</label>
                                             {{ form.date_joined }}
                                         </div>
                                         <div class="form-group">
                                             <label>Solicitante:</label>
                                             <div class="input-group">
-                                                {{ form.client }}
+                                                {{form.client }}
                                                 <div class="input-group-append">
                                                     <button class="btn btn-success btn-flat btnAddClient" type="button">
                                                         <i class="fas fa-user-plus"></i>
@@ -109,21 +109,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Subtotal:</label>
+                                            <label>Requisicion:</label>
+                                            {{ form.requisicion }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Total:</label>
                                             {{ form.subtotal }}
                                         </div>
-                                        <div class="form-group">
-                                            <label>IVA:</label>
-                                            {{ form.iva }}
-                                        </div>
-                                        <div class="form-group">
-                                            <label>IVA Calculado:</label>
-                                            <input type="text" class="form-control" readonly name="ivacalc" value="0.00">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Total a pagar:</label>
-                                            {{ form.total }}
-                                        </div>
+<!--                                        <div class="form-group">-->
+<!--                                            <label>IVA:</label>-->
+<!--                                            {{ form.iva }}-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label>IVA Calculado:</label>-->
+<!--                                            <input type="text" class="form-control" readonly name="ivacalc" value="0.00">-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label>Total a pagar:</label>-->
+<!--                                            {{ form.total }}-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +153,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            <b><i class="fas fa-user-plus"></i> Nuevo registro de un solicitante</b>
+                            <b><i class="fas fa-user-plus"></i> Nuevo registro de un cliente</b>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -165,7 +169,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
-                            <i class="fas fa-save"></i> Guardar Solicitante
+                            <i class="fas fa-save"></i> Guardar Cliente
                         </button>
                     </div>
                 </div>
@@ -178,7 +182,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <b><i class="fas fa-search"></i> Búsqueda de Insumos</b>
+                        <b><i class="fas fa-search"></i> Búsqueda de Productos</b>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -188,7 +192,7 @@
                     <table class="table table-bordered table-sm" id="tblSearchProducts">
                         <thead>
                         <tr>
-                            <th>Insumo</th>
+                            <th>Producto</th>
                             <th>Imagen</th>
                             <th>Stock</th>
                             <th>Precio Unitario</th>

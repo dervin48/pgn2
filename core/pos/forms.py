@@ -29,6 +29,55 @@ class CategoryForm(ModelForm):
             data['error'] = str(e)
         return data
 
+class CargoForm(ModelForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['name'].widget.attrs['autofocus'] = True
+
+        class Meta:
+            model = Cargo
+            fields = '__all__'
+            widgets = {
+                'name': forms.TextInput(attrs={'placeholder': 'Ingrese un cargo'}),
+
+            }
+
+        def save(self, commit=True):
+            data = {}
+            form = super()
+            try:
+                if form.is_valid():
+                    form.save()
+                else:
+                    data['error'] = form.errors
+            except Exception as e:
+                data['error'] = str(e)
+            return data
+class ServicioForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Servicio
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Ingrese un nombre'}),
+            'desc': forms.Textarea(attrs={'placeholder': 'Ingrese una descripción', 'rows': 3, 'cols': 3}),
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
 
 class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -71,7 +120,14 @@ class ClientForm(ModelForm):
         fields = '__all__'
         widgets = {
             'names': forms.TextInput(attrs={'placeholder': 'Ingrese un nombre'}),
-            'dni': forms.TextInput(attrs={'placeholder': 'Ingrese un número de DPI'}),
+            'servicio': forms.Select(attrs={
+                'class': 'select2',
+                'style': 'width: 100%'
+            }),
+            'cargo': forms.Select(attrs={
+                'class': 'select2',
+                'style': 'width: 100%'
+            }),
             'birthdate': forms.DateInput(format='%Y-%m-%d', attrs={
                 'class': 'form-control datetimepicker-input',
                 'id': 'birthdate',
@@ -113,7 +169,7 @@ class SaleForm(ModelForm):
         widgets = {
             'client': forms.Select(attrs={
                 'class': 'custom-select select2',
-                # 'style': 'width: 100%'
+                'style': 'width: 100%'
             }),
             'date_joined': forms.DateInput(format='%Y-%m-%d', attrs={
                 'value': datetime.now().strftime('%Y-%m-%d'),
@@ -124,17 +180,20 @@ class SaleForm(ModelForm):
                 'data-toggle': 'datetimepicker'
             }
                                            ),
-            'iva': forms.TextInput(attrs={
-                'class': 'form-control',
+            # 'iva': forms.TextInput(attrs={
+            #     'class': 'form-control',
+            # }),
+            'requisicion': forms.TextInput(attrs={
+                'class':'form-control',
             }),
             'subtotal': forms.TextInput(attrs={
                 'readonly': True,
                 'class': 'form-control',
             }),
-            'total': forms.TextInput(attrs={
-                'readonly': True,
-                'class': 'form-control',
-            })
+            # 'total': forms.TextInput(attrs={
+            #     'readonly': True,
+            #     'class': 'form-control',
+            # })
         }
 
 class IntoForm(ModelForm):
@@ -153,19 +212,20 @@ class IntoForm(ModelForm):
                 'id': 'date_joined',
                 'data-target': '#date_joined',
                 'data-toggle': 'datetimepicker'
-            }
-                                           ),
-            'iva': forms.TextInput(attrs={
-                'class': 'form-control',
             }),
+            'requisicion': forms.TextInput(attrs={'placeholder': 'Ingrese la Requisicion'}),
+
+            # 'iva': forms.TextInput(attrs={
+            #     'class': 'form-control',
+            # }),
             'subtotal': forms.TextInput(attrs={
                 'readonly': True,
                 'class': 'form-control',
             }),
-            'total': forms.TextInput(attrs={
-                'readonly': True,
-                'class': 'form-control',
-            })
+            # 'total': forms.TextInput(attrs={
+            #     'readonly': True,
+            #     'class': 'form-control',
+            # })
         }
 
 class CompanyForm(ModelForm):
@@ -178,7 +238,7 @@ class CompanyForm(ModelForm):
         fields = '__all__'
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Ingrese un nombre'}),
-            'ruc': forms.TextInput(attrs={'placeholder': 'Ingrese un ruc'}),
+            'ruc': forms.TextInput(attrs={'placeholder': 'Ingrese un NIT'}),
             'address': forms.TextInput(attrs={'placeholder': 'Ingrese una dirección'}),
             'mobile': forms.TextInput(attrs={'placeholder': 'Ingrese un teléfono celular'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Ingrese un teléfono convencional'}),

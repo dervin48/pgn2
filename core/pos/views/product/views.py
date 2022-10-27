@@ -30,10 +30,10 @@ class ProductListView(ValidatePermissionRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Productos'
+        context['title'] = 'Listado de Insumos'
         context['create_url'] = reverse_lazy('product_create')
         context['list_url'] = reverse_lazy('product_list')
-        context['entity'] = 'Productos'
+        context['entity'] = 'Insumos'
         return context
 
 

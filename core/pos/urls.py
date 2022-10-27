@@ -1,11 +1,13 @@
 from django.urls import path
 from core.pos.views.category.views import *
+from core.pos.views.servicio.views import *
 from core.pos.views.client.views import *
 from core.pos.views.company.views import CompanyUpdateView
 from core.pos.views.dashboard.views import *
 from core.pos.views.product.views import *
 from core.pos.views.sale.views import *
 from core.pos.views.into.views import *
+from core.pos.views.cargo.views import *
 
 urlpatterns = [
     # dashboard
@@ -15,6 +17,16 @@ urlpatterns = [
     path('category/add/', CategoryCreateView.as_view(), name='category_create'),
     path('category/update/<int:pk>/', CategoryUpdateView.as_view(), name='category_update'),
     path('category/delete/<int:pk>/', CategoryDeleteView.as_view(), name='category_delete'),
+    # cargo
+    path('cargo/', CargoListView.as_view(), name='cargo_list'),
+    path('cargo/add/', CargoCreateView.as_view(), name='cargo_create'),
+    path('cargo/update/<int:pk>/', CargoUpdateView.as_view(), name='cargo_update'),
+    path('cargo/delete/<int:pk>/', CargoDeleteView.as_view(), name='cargo_delete'),
+    # servicio
+    path('servicio/', ServicioListView.as_view(), name='servicio_list'),
+    path('servicio/add/', ServicioCreateView.as_view(), name='servicio_create'),
+    path('servicio/update/<int:pk>/', ServicioUpdateView.as_view(), name='servicio_update'),
+    path('servicio/delete/<int:pk>/', ServicioDeleteView.as_view(), name='servicio_delete'),
     # client
     path('client/', ClientListView.as_view(), name='client_list'),
     path('client/add/', ClientCreateView.as_view(), name='client_create'),
