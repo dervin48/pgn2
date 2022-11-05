@@ -94,6 +94,7 @@ class IntoCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                     products = json.loads(request.POST['products'])
                     into = Into()
                     into.date_joined = request.POST['date_joined']
+                    into.requisicion = request.POST['requisicion']
                     # into.client_id = int(request.POST['client'])
                     # into.iva = float(request.POST['iva'])
                     into.save()

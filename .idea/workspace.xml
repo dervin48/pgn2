@@ -4,6 +4,21 @@
     <list default="true" id="846b5eb1-6ba7-4338-9296-d1816ffdc7d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/into/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/into/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/sale/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/sale/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/static/sale/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/static/sale/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/into/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/into/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/invoice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/templates/sale/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/templates/sale/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/into/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/into/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pos/views/sale/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/pos/views/sale/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db3.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db3.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/into/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/into/js/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/sale/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/sale/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/sale/js/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/sale/js/list.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

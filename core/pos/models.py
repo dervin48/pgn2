@@ -215,7 +215,7 @@ class Sale(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
     date_joined = models.DateField(default=datetime.now)
-    requisicion = models.IntegerField( null= True, verbose_name="No_requisicion" )
+    requisicion = models.CharField(max_length=10, unique=True, verbose_name='No Requisicion')
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     # iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     # total_iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
@@ -245,7 +245,6 @@ class Sale(models.Model):
         # item['total_iva'] = f'{self.total_iva:.2f}'
         # item['total'] = f'{self.total:.2f}'
         item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
-        item['requisicion'] = self.requisicion
         item['saleproduct'] = [i.toJSON() for i in self.saleproduct_set.all()]
         return item
 

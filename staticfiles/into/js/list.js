@@ -30,6 +30,7 @@ var into = {
             columns: [
                 {"data": "id"},
                 {"data": "date_joined"},
+                {"data": "requisicion"},
                 {"data": "subtotal"},
                 {"data": "id"},
             ],

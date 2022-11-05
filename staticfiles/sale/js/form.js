@@ -73,7 +73,7 @@ var sale = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '$' + parseFloat(data).toFixed(2);
+                        return 'Q' + parseFloat(data).toFixed(2);
                     }
                 },
                 {
@@ -97,7 +97,7 @@ var sale = {
 
                 $(row).find('input[name="cant"]').TouchSpin({
                     min: 1,
-                    max: data.is_inventoried ? row.stock : 1000000,
+                    max: data.is_inventoried ? data .stock : 1000000,
                     step: 1
                 });
 
@@ -256,7 +256,7 @@ $(function () {
                 '<p style="margin-bottom: 0;">' +
                 '<b>Nombre:</b> ' + repo.full_name + '<br>' +
                 '<b>Stock:</b> ' + stock + '<br>' +
-                '<b>PVP:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
+                '<b>PVP:</b> <span class="badge badge-warning">Q' + repo.pvp + '</span>' +
                 '</p>' +
                 '</div>' +
                 '</div>' +
@@ -293,7 +293,7 @@ $(function () {
             var tr = tblProducts.cell($(this).closest('td, li')).index();
             sale.details.products[tr.row].cant = cant;
             sale.calculateInvoice();
-            $('td:last', tblProducts.row(tr.row).node()).html('$' + sale.details.products[tr.row].subtotal.toFixed(2));
+            $('td:last', tblProducts.row(tr.row).node()).html('Q' + sale.details.products[tr.row].subtotal.toFixed(2));
         });
 
     $('.btnRemoveAll').on('click', function () {
@@ -360,7 +360,7 @@ $(function () {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '$' + parseFloat(data).toFixed(2);
+                        return 'Q' + parseFloat(data).toFixed(2);
                     }
                 },
                 {

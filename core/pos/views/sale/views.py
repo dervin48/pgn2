@@ -71,7 +71,7 @@ class SaleCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                 data = []
                 ids_exclude = json.loads(request.POST['ids'])
                 term = request.POST['term'].strip()
-                products = Product.objects.filter(Q(stock__gt=0) | Q(is_inventoried=True))
+                products = Product.objects.filter(Q(stock__gt=0) | Q(is_inventoried=False))
                 if len(term):
                     products = products.filter(name__icontains=term)
                 for i in products.exclude(id__in=ids_exclude)[0:10]:
@@ -94,6 +94,7 @@ class SaleCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                     sale = Sale()
                     sale.date_joined = request.POST['date_joined']
                     sale.client_id = int(request.POST['client'])
+                    sale.requisicion= int(request.POST['requisicion'])
                     # sale.iva = float(request.POST['iva'])
                     sale.save()
                     for i in products:
@@ -113,7 +114,7 @@ class SaleCreateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Create
                 data = []
                 term = request.POST['term']
                 clients = Client.objects.filter(
-                    Q(names__icontains=term) | Q(dni__icontains=term))[0:10]
+                    Q(names__icontains=term))
                 for i in clients:
                     item = i.toJSON()
                     item['text'] = i.get_full_name()
@@ -215,7 +216,7 @@ class SaleUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
                 data = []
                 term = request.POST['term']
                 clients = Client.objects.filter(
-                    Q(names__icontains=term) | Q(dni__icontains=term))[0:10]
+                    Q(names__icontains=term))
                 for i in clients:
                     item = i.toJSON()
                     item['text'] = i.get_full_name()
@@ -232,8 +233,8 @@ class SaleUpdateView(ExistsCompanyMixin, ValidatePermissionRequiredMixin, Update
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición de una Venta'
-        context['entity'] = 'Ventas'
+        context['title'] = 'Edición de una Solicitud'
+        context['entity'] = 'Solicitudes'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         context['products'] = self.get_details_product()

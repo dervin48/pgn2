@@ -213,8 +213,9 @@ class IntoForm(ModelForm):
                 'data-target': '#date_joined',
                 'data-toggle': 'datetimepicker'
             }),
-            'requisicion': forms.TextInput(attrs={'placeholder': 'Ingrese la Requisicion'}),
-
+            'requisicion': forms.TextInput(attrs={
+                'class':'form-control',
+            }),
             # 'iva': forms.TextInput(attrs={
             #     'class': 'form-control',
             # }),

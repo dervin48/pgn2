@@ -30,6 +30,7 @@ var sale = {
             columns: [
                 {"data": "number"},
                 {"data": "client.full_name"},
+                {"data": "requisicion"},
                 {"data": "date_joined"},
                 {"data": "subtotal"},
 //                {"data": "iva"},
@@ -153,7 +154,7 @@ $(function () {
                         targets: [-1, -3],
                         class: 'text-center',
                         render: function (data, type, row) {
-                            return '$' + parseFloat(data).toFixed(2);
+                            return 'Q' + parseFloat(data).toFixed(2);
                         }
                     },
                     {
